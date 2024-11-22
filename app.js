@@ -8,7 +8,6 @@ const commentRoute = require('./routes/comment')
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 const cors = require('cors')
-
 // mongoose.connect(process.env.MONGO_URI)
 // .then(res=> {
 //     console.log("connected with databse  ");
