@@ -13,7 +13,25 @@ cloudinary.config({
     api_secret: process.env.API_SECRET
 });
 
+//get own video
+Router.get('/own-video',checkAuth,async(req, res)=>{
+    try {
+        const token = req.headers.authorization.split(" ")[1]
+        const user = await jwt.verify(token, 'mukesh kumar 2725')
+        console.log(user);
+        const videos = await Video.find({user_id:user._id}).populate('user_id','channelName logoUrl')
+        res.status(200).json({
+            videos:videos
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            err:error
+        })
+    }
+})
 
+//upload video
 
 Router.post('/upload',checkAuth, async(req, res)=> {
     //console.log('upload video');
